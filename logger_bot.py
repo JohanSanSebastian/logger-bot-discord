@@ -4,12 +4,14 @@ import discord
 import datetime
 
 client = discord.Client()
+
 token = 'INSERT TOKEN HERE' #gotta get a token from discord.com/developers
 
 message_logs = 'FILE NAME HERE' #fill that (example: 'messages.txt')
 edit_logs = 'FILE NAME HERE' #fill that
 delete_logs = 'FILE NAME HERE' #fill that
-#those 3 could all be the same, in theory
+#those 3 could all be the same, but it would look messy
+
 
 @client.event
 async def on_ready(): #triggers when bot comes online
@@ -59,12 +61,14 @@ def message_log_format(message):
     timestamp = message.timestamp #a datetime.datetime object
     content = message.content
     f_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
-    return '[%s UTC] %s in #%s: %s (ID: %s)' % (f_timestamp, author, channel, content, author_id)
+    return '[%s UTC] %s in #%s: %s (USER_ID: %s)' % (f_timestamp, author, channel, content, author_id)
     
 def timestamp_now():
     """Returns string of the current UTC timestamp in year-month-day hour:minute:second format."""
-    now = date.datetime.utcnow()
+    now = datetime.datetime.utcnow()
     now_formatted = now.strftime('%Y-%m-%d %H:%M:%S')
     return now_formatted
+
+
     
 client.run(token)
