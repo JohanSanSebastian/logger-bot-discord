@@ -6,7 +6,7 @@ Change token, message_logs, edit_logs, delete_logs and it should be good to go.
 
 Requires:
 - Discord API module (https://github.com/Rapptz/discord.py)
-- a bot account token (https://discordapp.com/developers/)
+- a bot account token (https://discordapp.com/developers/applications/me/create)
 
 Creates up to 3 files where the logs are kept. The files should ideally be .txt (no other formats were tested).
 
