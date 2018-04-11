@@ -6,7 +6,7 @@ import datetime
 client = discord.Client()
 token = 'INSERT TOKEN HERE' #gotta get a token from discord.com/developers
 
-message_logs = 'FILE NAME HERE' #fill that
+message_logs = 'FILE NAME HERE' #fill that (example: 'messages.txt')
 edit_logs = 'FILE NAME HERE' #fill that
 delete_logs = 'FILE NAME HERE' #fill that
 #those 3 could all be the same, in theory
@@ -29,7 +29,7 @@ async def on_message(message): #triggers every time a message is sent
     
 @client.event
 async def on_message_edit(before, after):
-    if before.content == after.content: # guarantees that it doesn't trigger on embeds
+    if before.content == after.content: #guarantees that it doesn't trigger on embeds
         return None
     now = timestamp_now()
     author = before.author
@@ -51,6 +51,8 @@ async def on_message_delete(message):
     
     
 def message_log_format(message):
+    """How the messages are formatted in the logs.
+       discord.Message -> str"""
     author = message.author.display_name
     author_id = message.author.id #author id is useful in case the user changes their name.
     channel = message.channel
@@ -60,7 +62,9 @@ def message_log_format(message):
     return '[%s UTC] %s in #%s: %s (ID: %s)' % (f_timestamp, author, channel, content, author_id)
     
 def timestamp_now():
+    """Returns string of the current UTC timestamp in year-month-day hour:minute:second format."""
     now = date.datetime.utcnow()
     now_formatted = now.strftime('%Y-%m-%d %H:%M:%S')
+    return now_formatted
     
 client.run(token)
