@@ -49,6 +49,11 @@ async def on_message_delete(message):
     change = 'Message deleted [{}]:\n{}\n\n'.format(now, message_log_format(message))
     with open(delete_logs, 'a') as logs:
         logs.write(change)
+        
+@bot.command()
+async def ping():
+    print('pong')
+    bot.say('pong')
  
  
     
@@ -56,9 +61,9 @@ def message_log_format(message):
     """How the messages are formatted in the logs.
        discord.Message -> str"""
     author = message.author.display_name
-    if author.isalnum():
+    if author.isalnum(): #makes sure that there are no special characters in the name
         clean_author = author
-    else:
+    else: #if there are special characters, don't include them
         clean_author = ''.join(c for c in author if c.isalnum())
     author_id = message.author.id #author id is useful in case the user changes their name.
     channel = message.channel
